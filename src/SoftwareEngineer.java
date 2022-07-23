@@ -1,10 +1,14 @@
 public class SoftwareEngineer extends TechnicalEmployee{
+
+    private int checkIns;
     private boolean codeAccess;
+
 
     //Default SE Code assess privileges is no = disallow to change code
     public SoftwareEngineer(String name) {
         super(name);
-        this.codeAccess = false;
+        this.codeAccess = false; //start without access to code
+        this.checkIns = 0; //start with 0 code check ins
     }
 
     //return the SE is it have access to make changes the code base
@@ -12,15 +16,14 @@ public class SoftwareEngineer extends TechnicalEmployee{
         return this.codeAccess;
     }
 
-    //Allow or disallow SE code privileges to changes the code
+    //Allow or disallow SE code privileges to change the code
     public void setCodeAccess(boolean access) {
-        if (access) {
-            this.codeAccess = true;
-        }
-        else {
-            this.codeAccess = false;
-        }
+        this.codeAccess = access;
 
+    }
+
+    public int getSuccessfulCheckIns() {
+        return this.checkIns;
     }
 
     //Check in to code
@@ -28,20 +31,16 @@ public class SoftwareEngineer extends TechnicalEmployee{
         // Need to verify if manager approves checkIn. Return true and increment checkIns by 1. Else, false.
         TechnicalLead manager = (TechnicalLead)this.getManager(this);
         if (manager.approveCheckIn(this)) {
-            super.checkIn();
+            checkIns++;
             return true;
         } else {
-            if (codeAccess) { codeAccess = false; }
+            this.codeAccess = false;
             return false;
         }
     }
 
-    public int getSuccessfulCheckIns() {
-        return super.getSuccessfulCheckIns();
-    }
-
-    public String employeeStatus() {
-        return this.getEmployeeID() + " " + this.getName() + " has " + this.getSuccessfulCheckIns() + " successful check ins.";
+    public int getCheckIns(){
+        return this.checkIns;
     }
 
 }

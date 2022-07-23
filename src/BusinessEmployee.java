@@ -1,5 +1,8 @@
-public abstract class BusinessEmployee extends Employee{
-    private double bonusBudget;
+import java.util.ArrayList;
+
+public class BusinessEmployee extends Employee{
+    double bonusBudget;
+    TechnicalLead currentlySupporting;
 
     public BusinessEmployee (String name) {
         super(name,0);
@@ -7,15 +10,10 @@ public abstract class BusinessEmployee extends Employee{
     }
 
     public double getBonusBudget() {
-        return bonusBudget;
-    }
-
-    public void  setBonusBudget(double bonusBudget) {
-        this.bonusBudget = bonusBudget;
+        return this.bonusBudget;
     }
 
     public String employeeStatus() {
-        return toString() + " with a budget of  " + getBonusBudget();
+        return this + " with a budget of  " + String.format("%.1f",getBonusBudget());
     }
-
 }

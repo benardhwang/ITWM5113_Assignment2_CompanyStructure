@@ -8,8 +8,11 @@ public class CompanyStructure {
         CTO.addReport(seA);
         CTO.addReport(seB);
         CTO.addReport(seC);
-        //seA.setCodeAccess(true);
-        //seA.checkInCode();
+        seA.setCodeAccess(true);
+        seA.checkInCode();
+        //seA.setManager(CTO);
+        seC.setCodeAccess(true);
+        seC.checkInCode();
         System.out.println(CTO.getTeamStatus());
 
         TechnicalLead VPofENG = new TechnicalLead("Bill Gates");
@@ -21,6 +24,8 @@ public class CompanyStructure {
         VPofENG.addReport(seE);
         VPofENG.addReport(seF);
         VPofENG.addReport(seG);
+        seF.setCodeAccess(true);
+        seF.checkInCode();
         System.out.println(VPofENG.getTeamStatus());
 
         BusinessLead CFO = new BusinessLead("Amy Hood");
@@ -28,6 +33,8 @@ public class CompanyStructure {
         Accountant actB = new Accountant("Andrew");
         CFO.addReport(actA, CTO);
         CFO.addReport(actB, VPofENG);
+        actA.bonusBudget = 20.00;
+        actB.bonusBudget = 80.00;
         System.out.println(CFO.getTeamStatus());
 
     }

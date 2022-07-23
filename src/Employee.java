@@ -1,11 +1,10 @@
-abstract class Employee {
+public abstract class Employee {
     private String empName;
     private double baseSalary;
     private int empId;
-    // set static to ensure each employee object getting new employee number
-    private static int autoNumber;
+    private static int autoNumber;// set static to ensure each employee object getting new employee number
     private Employee manager;
-    //private String empStatus;
+    private String empStatus;
 
     //Constructor new employee
     public Employee (String name, double baseSalary) {
@@ -31,7 +30,6 @@ abstract class Employee {
 
     //return base salary
     public void setBaseSalary(double salary) {
-
         this.baseSalary = salary;
     }
 
@@ -61,8 +59,10 @@ abstract class Employee {
     }
 
     //Return employee status this will different for every subclass of employee
-    abstract String employeeStatus();
-
+    public abstract String employeeStatus();
+    /*public String employeeStatus() {
+        return this.empStatus;
+    }*/
 }
 
 

@@ -6,11 +6,9 @@ public class BusinessLead extends BusinessEmployee{
 
     public BusinessLead(String name){
         super(name);
-        super.setBaseSalary(2*super.getBaseSalary());
-        setHeadCount(10);
-    }
-    public void setHeadCount(int i) {
-        headCount = i;
+        super.setManager(this);
+        super.setBaseSalary(2*super.getBaseSalary()); //twice base salary of an accountant (PLS CHECK!!)
+        headCount = 10;
     }
 
     public boolean hasHeadCount() {
@@ -23,9 +21,12 @@ public class BusinessLead extends BusinessEmployee{
     }
 
     public boolean addReport(Accountant e, TechnicalLead supportTeam) {
-        if (hasHeadCount()){
-            team.add(e);
-            e.setManager(e);
+        if (this.hasHeadCount()){
+            this.team.add(e);
+            e.setManager(this); //added 20220723
+            e.supportTeam(supportTeam);
+            this.bonusBudget += this.getBaseSalary()*1.1; //added 20220723
+            this.currentlySupporting = supportTeam; //added 20220723
             return true;
         }else{
             return false;
@@ -34,8 +35,8 @@ public class BusinessLead extends BusinessEmployee{
     }
 
     public boolean requestBonus(Employee e, double bonus){
-        if (bonus < super.getBonusBudget()){
-            super.setBonusBudget(super.getBonusBudget() - bonus);
+        if (bonus < this.getBonusBudget()){ //check if the bonus amount requested fit in current businessLead budget
+            this.bonusBudget -= bonus; //businessLead budget should be deducted
             return true;
         }else {
             return false;
@@ -57,17 +58,18 @@ public class BusinessLead extends BusinessEmployee{
     String getTeamStatus() {
         //get Team total bonus
         int bonus = 0;
-        for (int i = 0; i < team.size(); i++){
+        for (int i = 0; i < team.size(); i++) {
             bonus += team.get(i).getBonusBudget();
         }
+
         String outputString = "";
         outputString += this.getEmployeeID() + " ";
         outputString += this.getName() + " ";
         outputString += "with a budget of ";
-        outputString += bonus;
-        if(team.size() > 0){
-            outputString += ", and is managing";
-            for (int i = 0; i < team.size(); i++){
+        outputString += String.format("%.1f",(bonus+this.bonusBudget));
+        if (team.size() > 0) {
+            outputString += ", and is managing:";
+            for (int i = 0; i < team.size(); i++) {
                 outputString += "\n \t" + team.get(i).employeeStatus();
             }
         } else {
