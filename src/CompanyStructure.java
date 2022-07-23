@@ -33,8 +33,8 @@ public class CompanyStructure {
         Accountant actB = new Accountant("Andrew");
         CFO.addReport(actA, CTO);
         CFO.addReport(actB, VPofENG);
-        actA.bonusBudget = 20.00;
-        actB.bonusBudget = 80.00;
+        actA.setBonusBudget(20.00);
+        actB.setBonusBudget(80.00);
         System.out.println(CFO.getTeamStatus());
 
     }

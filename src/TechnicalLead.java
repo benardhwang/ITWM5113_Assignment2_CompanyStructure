@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class TechnicalLead extends TechnicalEmployee {
     private int headCount;
-    BusinessLead supportedBy;
+    private BusinessLead supportedBy;
     private ArrayList<SoftwareEngineer> team = new ArrayList<>();
     //private int totalCheckIns = 0;
 

@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 
 public class BusinessEmployee extends Employee{
-    double bonusBudget;
+    public void setBonusBudget(double bonusBudget) {
+        this.bonusBudget = bonusBudget;
+    }
+
+    private double bonusBudget;
     TechnicalLead currentlySupporting;
 
     public BusinessEmployee (String name) {
