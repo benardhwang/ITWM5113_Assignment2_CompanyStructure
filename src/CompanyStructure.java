@@ -10,7 +10,6 @@ public class CompanyStructure {
         CTO.addReport(seC);
         seA.setCodeAccess(true);
         seA.checkInCode();
-        //seA.setManager(CTO);
         seC.setCodeAccess(true);
         seC.checkInCode();
         System.out.println(CTO.getTeamStatus());
