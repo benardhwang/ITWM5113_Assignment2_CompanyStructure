@@ -4,8 +4,8 @@ public class TechnicalLead extends TechnicalEmployee {
     private int headCount;
     private BusinessLead supportedBy;
     private ArrayList<SoftwareEngineer> team = new ArrayList<>();
-    //private int totalCheckIns = 0;
 
+    //Constructor of new Technical lead and it's default values
     public TechnicalLead(String name) {
         super(name);
         super.setManager(this);
@@ -13,10 +13,12 @@ public class TechnicalLead extends TechnicalEmployee {
         setHeadCount(4);
     }
 
+    //Setting for head count report to the technical lead
     public void setHeadCount(int i) {
         headCount = i;
     }
 
+    //Checking of the default headcount vs actual headcount
     public boolean hasHeadCount() {
         if (team.size() < headCount) {
             return true; }
@@ -24,6 +26,7 @@ public class TechnicalLead extends TechnicalEmployee {
             return false; }
     }
 
+    //add reporting staff
     public boolean addReport(SoftwareEngineer e) {
         if (hasHeadCount()) {
             team.add(e);
@@ -34,6 +37,7 @@ public class TechnicalLead extends TechnicalEmployee {
         }
     }
 
+    //approve reporting staff check in
     public boolean approveCheckIn(SoftwareEngineer e) {
         if ((team.contains(e)) && (e.getCodeAccess())) {
             return true; //if employee does report to this manager and code access is true
@@ -43,6 +47,7 @@ public class TechnicalLead extends TechnicalEmployee {
         }
     }
 
+    //request bonus with business lead support the technical lead
     public boolean requestBonus(Employee e, double bonus) {
         if(this.supportedBy.approveBonus(e, bonus)) {
             return true;
@@ -51,19 +56,16 @@ public class TechnicalLead extends TechnicalEmployee {
         }
     }
 
+    //return teams status
     public String getTeamStatus() {
         //get Team total check ins
         int checkInsCount =0;
         for (int i = 0; i < team.size(); i++) {
-            checkInsCount += team.get(i).getCheckIns();
+            checkInsCount += team.get(i).getSuccessfulCheckIns();
         }
 
         String outputString = "";
         outputString = super.toString() + " has "+checkInsCount+" successful check ins";
-        //outputString += this.getEmployeeID() + " ";
-        //outputString += this.getName() + " ";
-        //outputString += "has ";
-        //outputString += checkIns + " successful check ins";
         if (team.size() > 0) {
             outputString += ", and is managing.";
             for (int i = 0; i < team.size(); i++) {
@@ -75,6 +77,7 @@ public class TechnicalLead extends TechnicalEmployee {
         return outputString;
     }
 
+    //return total team salary
     public double getSalaries() {
         double salary = 0.0;
         for (int i = 0; i < this.team.size(); i++) {

@@ -6,8 +6,8 @@ public class BusinessLead extends BusinessEmployee{
 
     public BusinessLead(String name){
         super(name);
-        super.setManager(this);
-        super.setBaseSalary(2*super.getBaseSalary()); //twice base salary of an accountant (PLS CHECK!!)
+        //super.setManager(this);
+        super.setBaseSalary(2*super.getBaseSalary()); //twice base salary of an accountant
         headCount = 10;
     }
 
@@ -20,6 +20,7 @@ public class BusinessLead extends BusinessEmployee{
         }
     }
 
+    //add accountant and technical lead report to him/her
     public boolean addReport(Accountant e, TechnicalLead supportTeam) {
         if (this.hasHeadCount()){
             this.team.add(e);
@@ -34,6 +35,11 @@ public class BusinessLead extends BusinessEmployee{
 
     }
 
+    /**check if the bonus amount requested would fit in current
+    BusinessLead's budget. If it is, that employee should get that
+    bonus, the BusinessLeader's budget should be deducted and
+    true should be returned. False should be returned otherwise
+     */
     public boolean requestBonus(Employee e, double bonus){
         if (bonus < this.getBonusBudget()){ //check if the bonus amount requested fit in current businessLead budget
             this.setBonusBudget(this.getBonusBudget()- bonus); //businessLead budget should be deducted
@@ -43,6 +49,11 @@ public class BusinessLead extends BusinessEmployee{
         }
     }
 
+    /**Should check if the bonus amount requested would fit in current
+     BusinessLead's budget. If it is, that employee should get that
+     bonus, the BusinessLeader's budget should be deducted and
+     true should be returned. False should be returned otherwise
+     */
     public boolean approveBonus (Employee e, double bonus){
         double checkBonusAfford = super.getBonusBudget();
         for (int i = 0; i < this.team.size(); i++){
@@ -55,9 +66,9 @@ public class BusinessLead extends BusinessEmployee{
         }
     }
 
-    String getTeamStatus() {
+    public String getTeamStatus() {
         //get Team total bonus
-        int bonus = 0;
+        double bonus = 0;
         for (int i = 0; i < team.size(); i++) {
             bonus += team.get(i).getBonusBudget();
         }
@@ -66,7 +77,8 @@ public class BusinessLead extends BusinessEmployee{
         outputString += this.getEmployeeID() + " ";
         outputString += this.getName() + " ";
         outputString += "with a budget of ";
-        outputString += String.format("%.1f",(bonus+this.getBonusBudget()));
+        outputString += String.format("%.1f",bonus);
+        //outputString += String.format("%.1f",(bonus+this.getBonusBudget()));
         if (team.size() > 0) {
             outputString += ", and is managing:";
             for (int i = 0; i < team.size(); i++) {

@@ -4,7 +4,6 @@ public abstract class Employee {
     private int empId;
     private static int autoNumber;// set static to ensure each employee object getting new employee number
     private Employee manager;
-    private String empStatus;
 
     //Constructor new employee
     public Employee (String name, double baseSalary) {
@@ -60,9 +59,6 @@ public abstract class Employee {
 
     //Return employee status this will different for every subclass of employee
     public abstract String employeeStatus();
-    /*public String employeeStatus() {
-        return this.empStatus;
-    }*/
 }
 
 
