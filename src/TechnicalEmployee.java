@@ -1,4 +1,4 @@
-public class TechnicalEmployee extends Employee{
+public abstract class TechnicalEmployee extends Employee{
 
     private int checkIns=0;
 

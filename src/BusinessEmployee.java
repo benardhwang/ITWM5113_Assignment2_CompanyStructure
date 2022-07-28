@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class BusinessEmployee extends Employee{
+public abstract class BusinessEmployee extends Employee{
 
     private double bonusBudget;
     public TechnicalLead currentlySupporting;
